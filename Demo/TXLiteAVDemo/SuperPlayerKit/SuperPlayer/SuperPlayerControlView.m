@@ -6,6 +6,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         _compact =YES;
+        //修改一些东西
     }
     return self;
 }
