@@ -85,7 +85,7 @@
     }];
     
     __weak typeof(self) weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(500 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [weakSelf hideTips];
     });
 }
@@ -396,7 +396,12 @@
         CGFloat b = self.superview.mm_safeAreaBottomGap;
         make.height.mas_equalTo(BOTTOM_IMAGE_VIEW_HEIGHT+b);
     }];
-    
+    [self.tipsView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self).mas_offset(15);
+        make.right.mas_equalTo(self);
+        make.height.mas_equalTo(70);
+        make.bottom.mas_equalTo(self).mas_offset(-135);
+    }];
     self.videoSlider.hiddenPoints = NO;
 }
 /**
@@ -422,6 +427,13 @@
     
     [self.bottomImageView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(BOTTOM_IMAGE_VIEW_HEIGHT);
+    }];
+    
+    [self.tipsView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self).mas_offset(15);
+        make.right.mas_equalTo(self);
+        make.height.mas_equalTo(70);
+        make.bottom.mas_equalTo(self).mas_offset(-50);
     }];
     
     self.videoSlider.hiddenPoints = YES;
