@@ -20,6 +20,7 @@
 
 @interface SPDefaultControlView () <UIGestureRecognizerDelegate, PlayerSliderDelegate>
 @property BOOL isLive;
+@property (nonatomic, strong)  PlayerTipsView * tipsView;
 @end
 
 @implementation SPDefaultControlView
@@ -60,7 +61,7 @@
         // 初始化时重置controlView
         [self playerResetControlView];
         
-        [self addTips];
+        [self showTips];
     }
     return self;
 }
@@ -72,16 +73,25 @@
 /**
  * 增加 提示语
  */
-- (void)addTips {
-    PlayerTipsView * tipsView = [[PlayerTipsView alloc]initWithFrame:CGRectZero tips:@[@"已为您定位至12:23", @"当前为非Wi-Fi，播放预计消耗40M流量"]];
-    [self addSubview:tipsView];
+- (void)showTips {
+    _tipsView = [[PlayerTipsView alloc]initWithFrame:CGRectZero tips:@[@"已为您定位至12:23", @"当前为非Wi-Fi，播放预计消耗40M流量"]];
+    [self addSubview:_tipsView];
     
-    [tipsView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_tipsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).mas_offset(15);
         make.right.mas_equalTo(self);
         make.height.mas_equalTo(70);
         make.bottom.mas_equalTo(self).mas_offset(-50);
     }];
+    
+    __weak typeof(self) weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakSelf hideTips];
+    });
+}
+
+- (void)hideTips {
+    [_tipsView removeFromSuperview];
 }
 
 - (void)makeSubViewsConstraints {
