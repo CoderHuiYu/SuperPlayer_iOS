@@ -11,7 +11,7 @@
 #import "StrUtils.h"
 #import "SPDefaultControlView.h"
 #import "UIView+Fade.h"
-
+#import "PlayerTipsView.h"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored"-Wdeprecated-declarations"
 
@@ -59,12 +59,29 @@
         self.moreContentView.hidden = YES;
         // 初始化时重置controlView
         [self playerResetControlView];
+        
+        [self addTips];
     }
     return self;
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+/**
+ * 增加 提示语
+ */
+- (void)addTips {
+    PlayerTipsView * tipsView = [[PlayerTipsView alloc]initWithFrame:CGRectZero tips:@[@"已为您定位至12:23", @"当前为非Wi-Fi，播放预计消耗40M流量"]];
+    [self addSubview:tipsView];
+    
+    [tipsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self).mas_offset(15);
+        make.right.mas_equalTo(self);
+        make.height.mas_equalTo(70);
+        make.bottom.mas_equalTo(self).mas_offset(-50);
+    }];
 }
 
 - (void)makeSubViewsConstraints {

@@ -68,7 +68,7 @@ static UISlider * _volumeSlider;
  */
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if (self) { [self initializeThePlayer]; }
+    if (self) { [self initializeThePlayer];}
     return self;
 }
 
