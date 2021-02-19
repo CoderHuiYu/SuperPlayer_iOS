@@ -197,6 +197,8 @@ __weak UITextField *urlField;
     if (self.videoURL) {
         SuperPlayerModel *playerModel = [[SuperPlayerModel alloc] init];
         playerModel.videoURL         = self.videoURL;
+        UIView * temp = [[UIView alloc]init];
+        temp.backgroundColor = [UIColor redColor];
         [self.playerView playWithModel:playerModel];
         [self.playerView.controlView setTitle:@"上传视频"];
     }

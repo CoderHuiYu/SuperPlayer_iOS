@@ -1157,6 +1157,14 @@ static UISlider * _volumeSlider;
 #pragma mark - Setter 
 
 
+-(void)setNextCoverView:(UIView *)nextCoverView {
+    _nextCoverView = nextCoverView;
+    [self addSubview:_nextCoverView];
+    [_nextCoverView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.bottom.mas_equalTo(self);
+    }];
+}
+
 /**
  *  设置播放的状态
  *
