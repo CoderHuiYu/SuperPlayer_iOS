@@ -1220,7 +1220,18 @@ static UISlider * _volumeSlider;
 - (SuperPlayerControlView *)controlView
 {
     if (_controlView == nil) {
-        self.controlView = [[SPDefaultControlView alloc] initWithFrame:CGRectZero];
+        SPDefaultControlView * temp = [[SPDefaultControlView alloc] initWithFrame:CGRectZero];
+        temp.shareActionBlock = ^{
+            if ([self.delegate respondsToSelector:@selector(superPlayerShareAction:)]) {
+                [self.delegate superPlayerShareAction:self];
+            }
+        };
+        temp.thumbUpActionBlock = ^(BOOL selected) {
+            if ([self.delegate respondsToSelector:@selector(superPlayerThumbUpAction: isSelected:)]) {
+                [self.delegate superPlayerThumbUpAction:self isSelected:selected];
+            }
+        };
+        self.controlView = temp;
     }
     return _controlView;
 }

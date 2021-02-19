@@ -276,11 +276,11 @@
 }
 
 - (void)thumbUpBtnClick:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    [self fadeOut:3];
+    // 点赞数需要加一
+    if (self.thumbUpActionBlock) {
+        self.thumbUpActionBlock(sender.selected);
+    }
 }
-
-
 
 - (void)moreBtnClick:(UIButton *)sender {
     self.topImageView.hidden = YES;
@@ -296,7 +296,9 @@
 }
 
 - (void)shareBtnClick:(UIButton *)sender {
-    
+    if (self.shareActionBlock) {
+        self.shareActionBlock();
+    }
 }
 
 - (UIView *)resolutionView {

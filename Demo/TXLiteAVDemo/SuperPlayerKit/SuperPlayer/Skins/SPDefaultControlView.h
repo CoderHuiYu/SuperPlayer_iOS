@@ -7,6 +7,8 @@
 
 #import "SuperPlayerControlView.h"
 
+typedef void (^ActionBlock)(void);
+typedef void (^SelectActionBlock)(BOOL selected);
 @interface SPDefaultControlView : SuperPlayerControlView
 
 
@@ -82,4 +84,8 @@
 @property (nonatomic, strong) UIButton *playNumButton;
 /** 点赞button*/
 @property (nonatomic, strong) UIButton *thumbUpButton;
+
+@property (nonatomic, copy) ActionBlock shareActionBlock;
+@property (nonatomic, copy) SelectActionBlock thumbUpActionBlock;
+
 @end

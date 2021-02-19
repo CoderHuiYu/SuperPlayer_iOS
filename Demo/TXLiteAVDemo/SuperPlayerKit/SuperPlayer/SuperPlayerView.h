@@ -20,6 +20,10 @@
 /// 播放错误通知
 - (void)superPlayerError:(SuperPlayerView *)player errCode:(int)code errMessage:(NSString *)why;
 // 需要通知到父view的事件在此添加
+/// 分享事件
+- (void)superPlayerShareAction:(SuperPlayerView *)player;
+/// 点赞事件
+- (void)superPlayerThumbUpAction:(SuperPlayerView *)player isSelected:(BOOL)isSelected;
 @end
 
 /// 播放器的状态
