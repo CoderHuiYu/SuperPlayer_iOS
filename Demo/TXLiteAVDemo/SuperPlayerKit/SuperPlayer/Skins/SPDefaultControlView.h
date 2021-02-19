@@ -76,4 +76,10 @@
 @property (nonatomic, assign,getter=isLockScreen)BOOL isLockScreen;
 @property (nonatomic, strong) UIButton               *pointJumpBtn;
 
+/** 分享button*/
+@property (nonatomic, strong) UIButton *shareButton;
+/** 播放量button*/
+@property (nonatomic, strong) UIButton *playNumButton;
+/** 点赞button*/
+@property (nonatomic, strong) UIButton *thumbUpButton;
 @end

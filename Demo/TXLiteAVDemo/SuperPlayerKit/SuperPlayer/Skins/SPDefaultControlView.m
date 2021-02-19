@@ -37,9 +37,13 @@
         [self.bottomImageView addSubview:self.fullScreenBtn];
         [self.bottomImageView addSubview:self.totalTimeLabel];
         
-        [self.topImageView addSubview:self.captureBtn];
-        [self.topImageView addSubview:self.danmakuBtn];
-        [self.topImageView addSubview:self.moreBtn];
+//        [self.topImageView addSubview:self.captureBtn];
+        [self.topImageView addSubview:self.playNumButton];
+//        [self.topImageView addSubview:self.danmakuBtn];
+        [self.topImageView addSubview:self.thumbUpButton];
+//        [self.topImageView addSubview:self.moreBtn];
+        [self.topImageView addSubview:self.shareButton];
+        
         [self addSubview:self.lockBtn];
         [self.topImageView addSubview:self.backBtn];
         
@@ -54,8 +58,11 @@
         [self makeSubViewsConstraints];
         
         self.captureBtn.hidden = YES;
+        self.playNumButton.hidden = YES;
         self.danmakuBtn.hidden = YES;
+        self.thumbUpButton.hidden = YES;
         self.moreBtn.hidden     = YES;
+        self.shareButton.hidden     = YES;
         self.resolutionBtn.hidden   = YES;
         self.moreContentView.hidden = YES;
         // 初始化时重置controlView
@@ -108,31 +115,31 @@
         make.width.height.mas_equalTo(40);
     }];
     
-    [self.moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(40);
+    [self.shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(60);
         make.height.mas_equalTo(49);
         make.trailing.equalTo(self.topImageView.mas_trailing).offset(-10);
         make.centerY.equalTo(self.backBtn.mas_centerY);
     }];
     
-    [self.captureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(40);
+    [self.playNumButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(60);
         make.height.mas_equalTo(49);
-        make.trailing.equalTo(self.moreBtn.mas_leading).offset(-10);
+        make.trailing.equalTo(self.shareButton.mas_leading).offset(-10);
         make.centerY.equalTo(self.backBtn.mas_centerY);
     }];
     
-    [self.danmakuBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(40);
+    [self.thumbUpButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(60);
         make.height.mas_equalTo(49);
-        make.trailing.equalTo(self.captureBtn.mas_leading).offset(-10);
+        make.trailing.equalTo(self.playNumButton.mas_leading).offset(-10);
         make.centerY.equalTo(self.backBtn.mas_centerY);
     }];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.backBtn.mas_trailing).offset(5);
         make.centerY.equalTo(self.backBtn.mas_centerY);
-        make.trailing.equalTo(self.captureBtn.mas_leading).offset(-10);
+        make.trailing.equalTo(self.thumbUpButton.mas_leading).offset(-10);
     }];
     
     [self.bottomImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -159,8 +166,7 @@
     }];
     
     [self.resolutionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(30);
-        make.width.mas_greaterThanOrEqualTo(45);
+        make.width.height.mas_equalTo(30);
         make.trailing.equalTo(self.bottomImageView.mas_trailing).offset(-8);
         make.centerY.equalTo(self.startBtn.mas_centerY);
     }];
@@ -269,6 +275,13 @@
     [self fadeOut:3];
 }
 
+- (void)thumbUpBtnClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    [self fadeOut:3];
+}
+
+
+
 - (void)moreBtnClick:(UIButton *)sender {
     self.topImageView.hidden = YES;
     self.bottomImageView.hidden = YES;
@@ -280,6 +293,10 @@
     
     [self cancelFadeOut];
     self.isShowSecondView = YES;
+}
+
+- (void)shareBtnClick:(UIButton *)sender {
+    
 }
 
 - (UIView *)resolutionView {
@@ -302,6 +319,10 @@
 }
 
 - (void)resolutionBtnClick:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(controlViewBack:)]) {
+        [self.delegate controlViewBack:self];
+    }
+    return;
     self.topImageView.hidden = YES;
     self.bottomImageView.hidden = YES;
     self.lockBtn.hidden = YES;
@@ -369,18 +390,20 @@
     }
 }
 /**
- *  屏幕方向发生变化会调用这里
+ *  屏幕方向发生变化会调用这里 横屏
  */
 - (void)setOrientationLandscapeConstraint {
     self.fullScreen             = YES;
     self.lockBtn.hidden         = NO;
     self.fullScreenBtn.selected = self.isLockScreen;
     self.fullScreenBtn.hidden   = YES;
-    self.resolutionBtn.hidden   = self.resolutionArray.count == 0;
+    self.resolutionBtn.hidden   = NO;//  = self.resolutionArray.count == 0;
     self.moreBtn.hidden         = self.disableMoreBtn;
+    self.shareButton.hidden     = NO;
     self.captureBtn.hidden      = self.disableCaptureBtn;
+    self.playNumButton.hidden   = NO;
     self.danmakuBtn.hidden      = self.disableDanmakuBtn;
-    
+    self.thumbUpButton.hidden   = NO;
     [self.backBtn setImage:SuperPlayerImage(@"back_full") forState:UIControlStateNormal];
     [self.totalTimeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         if (self.resolutionArray.count > 0) {
@@ -414,8 +437,11 @@
     self.fullScreenBtn.hidden   = NO;
     self.resolutionBtn.hidden   = YES;
     self.moreBtn.hidden         = YES;
+    self.shareButton.hidden         = YES;
     self.captureBtn.hidden      = YES;
+    self.playNumButton.hidden   = YES;
     self.danmakuBtn.hidden      = YES;
+    self.thumbUpButton.hidden   = YES;
     self.moreContentView.hidden = YES;
     self.resolutionView.hidden  = YES;
     
@@ -557,6 +583,21 @@
     return _captureBtn;
 }
 
+- (UIButton *)playNumButton{
+    if (!_playNumButton) {
+        _playNumButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_playNumButton setImage:SuperPlayerImage(@"bofangshu") forState:UIControlStateNormal];
+        [_playNumButton setImage:SuperPlayerImage(@"bofangshu") forState:UIControlStateSelected];
+        [_playNumButton setTitle:@"203" forState:UIControlStateNormal];
+        _playNumButton.titleLabel.font = [UIFont systemFontOfSize:13];
+        [_playNumButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_playNumButton setTitleEdgeInsets:UIEdgeInsetsMake(0, _playNumButton.imageView.bounds.size.width+10, 0, 0)];
+        [_playNumButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -_playNumButton.titleLabel.bounds.size.width+10)];
+//        [_playNumButton addTarget:self action:@selector(captureBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _playNumButton;
+}
+
 - (UIButton *)danmakuBtn {
     if (!_danmakuBtn) {
         _danmakuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -565,6 +606,21 @@
         [_danmakuBtn addTarget:self action:@selector(danmakuBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _danmakuBtn;
+}
+
+- (UIButton *)thumbUpButton {
+    if (!_thumbUpButton) {
+        _thumbUpButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_thumbUpButton setImage:SuperPlayerImage(@"thumbs_up") forState:UIControlStateNormal];
+        [_thumbUpButton setImage:SuperPlayerImage(@"thumbs_up") forState:UIControlStateSelected];
+        [_thumbUpButton setTitle:@"200" forState:UIControlStateNormal];
+        _thumbUpButton.titleLabel.font = [UIFont systemFontOfSize:13];
+        [_thumbUpButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_thumbUpButton setTitleEdgeInsets:UIEdgeInsetsMake(0, _thumbUpButton.imageView.bounds.size.width+10, 0, 0)];
+        [_thumbUpButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -_thumbUpButton.titleLabel.bounds.size.width+10)];
+        [_thumbUpButton addTarget:self action:@selector(thumbUpBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _thumbUpButton;
 }
 
 - (UIButton *)moreBtn {
@@ -577,11 +633,27 @@
     return _moreBtn;
 }
 
+- (UIButton *)shareButton {
+    if (!_shareButton) {
+        _shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_shareButton setImage:SuperPlayerImage(@"share") forState:UIControlStateNormal];
+        [_shareButton setImage:SuperPlayerImage(@"share") forState:UIControlStateSelected];
+        [_shareButton setTitle:@"200" forState:UIControlStateNormal];
+        _shareButton.titleLabel.font = [UIFont systemFontOfSize:13];
+        [_shareButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_shareButton setTitleEdgeInsets:UIEdgeInsetsMake(0, _shareButton.imageView.bounds.size.width+10, 0, 0)];
+        [_shareButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -_shareButton.titleLabel.bounds.size.width+10)];
+        [_shareButton addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _shareButton;
+}
+
 - (UIButton *)resolutionBtn {
     if (!_resolutionBtn) {
         _resolutionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _resolutionBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        _resolutionBtn.backgroundColor = [UIColor clearColor];
+        [_resolutionBtn setImage:SuperPlayerImage(@"fullscreen") forState:UIControlStateNormal];
+//        _resolutionBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+//        _resolutionBtn.backgroundColor = [UIColor clearColor];
         [_resolutionBtn addTarget:self action:@selector(resolutionBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _resolutionBtn;
@@ -673,7 +745,9 @@
     self.lockBtn.hidden              = !self.isFullScreen;
     
     self.danmakuBtn.enabled = YES;
+    self.thumbUpButton.enabled = YES;
     self.captureBtn.enabled = YES;
+    self.playNumButton.enabled = YES;
     self.backLiveBtn.hidden              = YES;
 }
 
@@ -743,11 +817,11 @@
     
     for (UIView *subview in self.resolutionView.subviews)
         [subview removeFromSuperview];
-
+    
     _resolutionArray = resolutionNames;
+/*
     if (_resolutionArray.count > 0) {
-        [self.resolutionBtn setTitle:resolutionNames[currentResolutionIndex]
-                            forState:UIControlStateNormal];
+        [self.resolutionBtn setTitle:resolutionNames[currentResolutionIndex] forState:UIControlStateNormal];
     }
     UILabel *lable = [UILabel new];
     lable.text = @"清晰度";
@@ -782,6 +856,7 @@
             self.resoultionCurrentBtn = btn;
         }
     }
+ */
     if (self.isLive != isLive) {
         self.isLive = isLive;
         [self setNeedsLayout];
@@ -799,6 +874,7 @@
 {
     [super setTitle:title];
     self.titleLabel.text = title;
+//    self.titleLabel.text = @"动态追踪财务账目不平和背后真相，免除企业老板的免除企业老板的免除企业老板的";
 }
 
 #pragma clang diagnostic pop
