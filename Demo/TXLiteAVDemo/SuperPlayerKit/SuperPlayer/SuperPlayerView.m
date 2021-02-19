@@ -178,7 +178,7 @@ static UISlider * _volumeSlider;
     [self _removeOldPlayer];
     [self _playWithModel:playerModel];
     self.coverImageView.alpha = 1;
-    self.repeatBtn.hidden = YES;
+//    self.repeatBtn.hidden = YES;
     self.repeatBackBtn.hidden = YES;
     // 播放时添加监听
     [self addNotifications];
@@ -478,7 +478,9 @@ static UISlider * _volumeSlider;
                      shiftPlayback:self.isShiftPlayback
                          isPlaying:self.autoPlay];
     self.controlView.playerConfig = self.playerConfig;
-    self.repeatBtn.hidden = YES;
+//    self.repeatBtn.hidden = YES;
+    self.nextCoverView.hidden = YES;
+    self.nextCoverView.hidden = YES;
     self.repeatBackBtn.hidden = YES;
     self.playDidEnd = NO;
     [self.middleBlackBtn fadeOut:0.1];
@@ -790,7 +792,8 @@ static UISlider * _volumeSlider;
     [self.controlView fadeOut:0.2];
     [self fastViewUnavaliable];
     [self.netWatcher stopWatch];
-    self.repeatBtn.hidden = NO;
+//    self.repeatBtn.hidden = NO;
+    self.nextCoverView.hidden = NO;
     self.repeatBackBtn.hidden = NO;
     if ([self.delegate respondsToSelector:@selector(superPlayerDidEnd:)]) {
         [self.delegate superPlayerDidEnd:self];
