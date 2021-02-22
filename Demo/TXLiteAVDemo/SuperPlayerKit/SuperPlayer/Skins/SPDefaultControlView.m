@@ -110,9 +110,9 @@
     }];
     
     [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.topImageView.mas_leading).offset(5);
-        make.top.equalTo(self.topImageView.mas_top).offset(3);
-        make.width.height.mas_equalTo(40);
+        make.leading.equalTo(self.topImageView.mas_leading).offset(15);
+        make.top.equalTo(self.topImageView.mas_top).offset(15);
+        make.width.height.mas_equalTo(30);
     }];
     
     [self.shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
