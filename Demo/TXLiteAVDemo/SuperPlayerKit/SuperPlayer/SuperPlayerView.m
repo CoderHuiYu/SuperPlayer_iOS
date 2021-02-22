@@ -793,6 +793,7 @@ static UISlider * _volumeSlider;
     [self fastViewUnavaliable];
     [self.netWatcher stopWatch];
 //    self.repeatBtn.hidden = NO;
+    self.coverImageView.backgroundColor = [UIColor blackColor];
     self.nextCoverView.hidden = NO;
     self.repeatBackBtn.hidden = NO;
     [self bringSubviewToFront:_nextCoverView];
