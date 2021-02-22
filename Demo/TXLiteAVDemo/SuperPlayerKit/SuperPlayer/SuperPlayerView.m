@@ -795,6 +795,7 @@ static UISlider * _volumeSlider;
 //    self.repeatBtn.hidden = NO;
     self.nextCoverView.hidden = NO;
     self.repeatBackBtn.hidden = NO;
+    [self bringSubviewToFront:_nextCoverView];
     if ([self.delegate respondsToSelector:@selector(superPlayerDidEnd:)]) {
         [self.delegate superPlayerDidEnd:self];
     }
@@ -1159,9 +1160,11 @@ static UISlider * _volumeSlider;
 
 -(void)setNextCoverView:(UIView *)nextCoverView {
     _nextCoverView = nextCoverView;
+    _nextCoverView.hidden = YES;
     [self addSubview:_nextCoverView];
     [_nextCoverView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.mas_equalTo(self);
+        make.left.right.bottom.mas_equalTo(self);
+        make.top.mas_equalTo(self).mas_offset(61);
     }];
 }
 
