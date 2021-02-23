@@ -284,6 +284,12 @@
     }
 }
 
+- (void)setPraiseSign:(NSInteger)praiseSign {
+    _praiseSign = praiseSign;
+    UIImage * image =  _praiseSign == 1 ? SuperPlayerImage(@"thumbs_up") : SuperPlayerImage(@"thumbs_down");
+    [self.thumbUpButton setImage:image forState:UIControlStateNormal];
+}
+
 - (void)moreBtnClick:(UIButton *)sender {
     self.topImageView.hidden = YES;
     self.bottomImageView.hidden = YES;
