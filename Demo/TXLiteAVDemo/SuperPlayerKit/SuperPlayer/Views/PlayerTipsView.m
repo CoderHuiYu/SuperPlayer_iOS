@@ -10,6 +10,7 @@
 #import "Masonry.h"
 @interface PlayerTipsView()
 @property (nonatomic, strong) NSMutableArray<NSString *> *tips;
+
 @end
 @implementation PlayerTipsView
 - (NSMutableArray<NSString *> *)tips{
@@ -19,14 +20,18 @@
     return _tips;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame tips:(NSArray *)titles
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self.tips addObjectsFromArray:titles];
-        [self initialize];
     }
     return self;
+}
+
+-(void)setTipArray:(NSArray<NSString *> *)tipArray {
+    _tipArray = tipArray;
+    [_tips addObjectsFromArray:_tips];
+    [self initialize];
 }
 
 - (void)initialize {

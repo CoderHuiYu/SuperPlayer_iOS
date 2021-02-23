@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PlayerTipsView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame tips:(NSArray *)titles;
+@property (nonatomic, strong) NSArray<NSString *> *tipArray;
 
 @end
 

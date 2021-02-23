@@ -1189,6 +1189,12 @@ static UISlider * _volumeSlider;
     temp.praiseSign = _praiseSign;
 }
 
+- (void)setTips:(NSArray *)tips {
+    _tips = tips;
+    SPDefaultControlView * temp =  (SPDefaultControlView *)self.controlView;
+    temp.tips = _tips;
+}
+
 -(void)setNextCoverView:(UIView *)nextCoverView {
     _nextCoverView = nextCoverView;
     _nextCoverView.hidden = YES;

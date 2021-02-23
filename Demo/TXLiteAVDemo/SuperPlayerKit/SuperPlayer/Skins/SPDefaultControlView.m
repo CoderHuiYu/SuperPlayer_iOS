@@ -50,9 +50,8 @@
         [self addSubview:self.playeBtn];
         
         [self.topImageView addSubview:self.titleLabel];
-        
-        
         [self addSubview:self.backLiveBtn];
+        [self addSubview:self.tipsView];
         
         // 添加子控件的约束
         [self makeSubViewsConstraints];
@@ -65,6 +64,7 @@
         self.shareButton.hidden     = YES;
         self.resolutionBtn.hidden   = YES;
         self.moreContentView.hidden = YES;
+        self.tipsView.hidden = YES;
         // 初始化时重置controlView
         [self playerResetControlView];
         
@@ -77,20 +77,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
 /**
  * 增加 提示语
  */
 - (void)showTips {
-    _tipsView = [[PlayerTipsView alloc]initWithFrame:CGRectZero tips:@[@"已为您定位至12:23", @"当前为非Wi-Fi，播放预计消耗40M流量"]];
-    [self addSubview:_tipsView];
-    
-    [_tipsView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self).mas_offset(15);
-        make.right.mas_equalTo(self);
-        make.height.mas_equalTo(70);
-        make.bottom.mas_equalTo(self).mas_offset(-50);
-    }];
-    
+    _tipsView.hidden = NO;
     __weak typeof(self) weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(500 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [weakSelf hideTips];
@@ -98,6 +90,7 @@
 }
 
 - (void)hideTips {
+    _tipsView.hidden = YES;
     [_tipsView removeFromSuperview];
 }
 
@@ -200,6 +193,13 @@
         make.bottom.mas_equalTo(self.startBtn.mas_top).mas_offset(-15);
         make.width.mas_equalTo(70);
         make.centerX.equalTo(self);
+    }];
+    
+    [self.tipsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self).mas_offset(15);
+        make.right.mas_equalTo(self);
+        make.height.mas_equalTo(70);
+        make.bottom.mas_equalTo(self).mas_offset(-50);
     }];
 }
 
@@ -479,6 +479,11 @@
 #pragma mark - Private Method
 
 #pragma mark - setter
+- (void)setTips:(NSArray *)tips {
+    _tips = tips;
+    self.tipsView.tipArray = _tips;
+}
+
 - (void)setBrowseAll:(NSInteger)browseAll {
     _browseAll = browseAll;
     [self.playNumButton setTitle: [NSString stringWithFormat:@"%ld", _browseAll] forState:UIControlStateNormal];
@@ -510,6 +515,13 @@
         [_backBtn addTarget:self action:@selector(backBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backBtn;
+}
+
+- (PlayerTipsView *)tipsView {
+    if (!_tipsView) {
+        _tipsView = [[PlayerTipsView alloc]init];
+    }
+    return  _tipsView;
 }
 
 - (UIImageView *)topImageView {

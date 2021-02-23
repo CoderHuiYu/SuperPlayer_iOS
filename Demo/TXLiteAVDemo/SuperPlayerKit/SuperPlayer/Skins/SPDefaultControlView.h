@@ -91,5 +91,5 @@ typedef void (^SelectActionBlock)(BOOL selected);
 @property (nonatomic, assign) NSInteger praiseSign; // 0 未点赞   已点赞 1
 @property (nonatomic, copy) ActionBlock shareActionBlock;
 @property (nonatomic, copy) SelectActionBlock thumbUpActionBlock;
-
+@property (nonatomic, strong) NSArray *tips;
 @end
