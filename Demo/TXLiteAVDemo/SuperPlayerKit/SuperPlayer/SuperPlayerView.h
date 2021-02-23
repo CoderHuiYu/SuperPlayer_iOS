@@ -122,6 +122,11 @@ typedef NS_ENUM(NSInteger, SuperPlayerLayoutStyle) {
 - (void)pause;
 
 /**
+ 重播
+ */
+- (void)rePlay;
+
+/**
  *  从xx秒开始播放视频跳转
  *
  *  @param dragedSeconds 视频跳转的秒数

@@ -324,6 +324,14 @@ static UISlider * _volumeSlider;
         [_vodPlayer pause];
     }
 }
+
+/**
+ 重播
+ */
+- (void)rePlay {
+    [self configTXPlayer];
+}
+
 #pragma mark - Control View Configuration
 - (void)resetControlViewWithLive:(BOOL)isLive
                    shiftPlayback:(BOOL)isShiftPlayback
