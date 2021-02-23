@@ -30,7 +30,7 @@
 
 -(void)setTipArray:(NSArray<NSString *> *)tipArray {
     _tipArray = tipArray;
-    [_tips addObjectsFromArray:_tips];
+    [self.tips addObjectsFromArray:tipArray];
     [self initialize];
 }
 

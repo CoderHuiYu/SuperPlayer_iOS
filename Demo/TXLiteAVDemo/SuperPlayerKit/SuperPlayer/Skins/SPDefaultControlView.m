@@ -481,6 +481,7 @@
 #pragma mark - setter
 - (void)setTips:(NSArray *)tips {
     _tips = tips;
+    _tipsView.hidden = NO;
     self.tipsView.tipArray = _tips;
 }
 
