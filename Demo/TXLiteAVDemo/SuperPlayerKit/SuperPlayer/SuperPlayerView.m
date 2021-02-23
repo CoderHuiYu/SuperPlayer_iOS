@@ -1165,7 +1165,29 @@ static UISlider * _volumeSlider;
 }
 
 #pragma mark - Setter 
+- (void)setBrowseAll:(NSInteger)browseAll {
+    _browseAll = browseAll;
+    SPDefaultControlView * temp =  (SPDefaultControlView *)self.controlView;
+    temp.browseAll = _browseAll;
+}
 
+- (void)setThumbAll:(NSInteger)thumbAll {
+    _thumbAll = thumbAll;
+    SPDefaultControlView * temp = (SPDefaultControlView *)self.controlView;
+    temp.thumbAll = _thumbAll;
+}
+
+- (void)setShareCountAll:(NSInteger)shareCountAll {
+    _shareCountAll = shareCountAll;
+    SPDefaultControlView * temp =  (SPDefaultControlView *)self.controlView;
+    temp.shareCountAll = _shareCountAll;
+}
+
+- (void)setPraiseSign:(NSInteger)praiseSign {
+    _praiseSign = praiseSign;
+    SPDefaultControlView * temp =  (SPDefaultControlView *)self.controlView;
+    temp.praiseSign = _praiseSign;
+}
 
 -(void)setNextCoverView:(UIView *)nextCoverView {
     _nextCoverView = nextCoverView;

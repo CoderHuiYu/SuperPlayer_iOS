@@ -84,7 +84,11 @@ typedef void (^SelectActionBlock)(BOOL selected);
 @property (nonatomic, strong) UIButton *playNumButton;
 /** 点赞button*/
 @property (nonatomic, strong) UIButton *thumbUpButton;
-
+/// 播放 点赞 分享数目
+@property (nonatomic, assign) NSInteger browseAll;
+@property (nonatomic, assign) NSInteger thumbAll;
+@property (nonatomic, assign) NSInteger shareCountAll;
+@property (nonatomic, assign) NSInteger praiseSign; // 0 未点赞   已点赞 1
 @property (nonatomic, copy) ActionBlock shareActionBlock;
 @property (nonatomic, copy) SelectActionBlock thumbUpActionBlock;
 

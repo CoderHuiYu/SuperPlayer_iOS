@@ -276,7 +276,9 @@
 }
 
 - (void)thumbUpBtnClick:(UIButton *)sender {
-    // 点赞数需要加一
+    // 点赞数需要加一 或者减一
+    self.praiseSign = self.praiseSign == 1 ? 0 : 1;
+    [self.thumbUpButton setTitle:[NSString stringWithFormat:@"%ld", self.praiseSign == 0 ? self.thumbAll - 1 : self.thumbAll + 1 ] forState:UIControlStateNormal];
     if (self.thumbUpActionBlock) {
         self.thumbUpActionBlock(sender.selected);
     }
@@ -471,6 +473,20 @@
 #pragma mark - Private Method
 
 #pragma mark - setter
+- (void)setBrowseAll:(NSInteger)browseAll {
+    _browseAll = browseAll;
+    [self.playNumButton setTitle: [NSString stringWithFormat:@"%ld", _browseAll] forState:UIControlStateNormal];
+}
+
+- (void)setThumbAll:(NSInteger)thumbAll {
+    _thumbAll = thumbAll;
+    [self.thumbUpButton setTitle: [NSString stringWithFormat:@"%ld", _thumbAll] forState:UIControlStateNormal];
+}
+
+- (void)setShareCountAll:(NSInteger)shareCountAll {
+    _shareCountAll = shareCountAll;
+    [self.shareButton setTitle: [NSString stringWithFormat:@"%ld", _shareCountAll] forState:UIControlStateNormal];
+}
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {

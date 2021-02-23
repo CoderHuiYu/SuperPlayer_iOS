@@ -92,6 +92,11 @@ typedef NS_ENUM(NSInteger, SuperPlayerLayoutStyle) {
 @property (nonatomic) BOOL loop;
 /// 播放结束后展示view
 @property (nonatomic, strong) UIView * nextCoverView;
+/// 播放 点赞 分享数目
+@property (nonatomic, assign) NSInteger browseAll;
+@property (nonatomic, assign) NSInteger thumbAll;
+@property (nonatomic, assign) NSInteger shareCountAll;
+@property (nonatomic, assign) NSInteger praiseSign; //0：未点赞 1：已点赞
 /**
  * 视频雪碧图
  */
