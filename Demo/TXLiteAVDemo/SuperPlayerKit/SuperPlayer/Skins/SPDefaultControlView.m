@@ -278,7 +278,7 @@
 - (void)thumbUpBtnClick:(UIButton *)sender {
     // 点赞数需要加一 或者减一
     self.praiseSign = self.praiseSign == 1 ? 0 : 1;
-    [self.thumbUpButton setTitle:[NSString stringWithFormat:@"%ld", self.praiseSign == 0 ? self.thumbAll - 1 : self.thumbAll + 1 ] forState:UIControlStateNormal];
+    self.thumbAll = self.praiseSign == 0 ? self.thumbAll - 1 : self.thumbAll + 1;
     if (self.thumbUpActionBlock) {
         self.thumbUpActionBlock(sender.selected);
     }
