@@ -105,21 +105,21 @@
     }];
     
     [self.shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(60);
+        make.width.mas_equalTo(70);
         make.height.mas_equalTo(49);
         make.trailing.equalTo(self.topImageView.mas_trailing).offset(-10);
         make.centerY.equalTo(self.backBtn.mas_centerY);
     }];
     
     [self.playNumButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(60);
+        make.width.mas_equalTo(70);
         make.height.mas_equalTo(49);
         make.trailing.equalTo(self.shareButton.mas_leading).offset(-10);
         make.centerY.equalTo(self.backBtn.mas_centerY);
     }];
     
     [self.thumbUpButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(60);
+        make.width.mas_equalTo(70);
         make.height.mas_equalTo(49);
         make.trailing.equalTo(self.playNumButton.mas_leading).offset(-10);
         make.centerY.equalTo(self.backBtn.mas_centerY);
