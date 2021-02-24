@@ -808,6 +808,10 @@ static UISlider * _volumeSlider;
     if ([self.delegate respondsToSelector:@selector(superPlayerDidEnd:)]) {
         [self.delegate superPlayerDidEnd:self];
     }
+    // 自动退出全屏
+    if (self.isFullScreen) {
+        self.isFullScreen = NO;
+    }
 }
 
 #pragma mark - UIKit Notifications
