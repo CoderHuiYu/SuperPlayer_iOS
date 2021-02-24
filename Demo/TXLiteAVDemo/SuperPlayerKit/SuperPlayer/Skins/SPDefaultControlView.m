@@ -67,8 +67,6 @@
         self.tipsView.hidden = YES;
         // 初始化时重置controlView
         [self playerResetControlView];
-        
-        [self showTips];
     }
     return self;
 }
@@ -82,7 +80,6 @@
  * 增加 提示语
  */
 - (void)showTips {
-    _tipsView.hidden = NO;
     __weak typeof(self) weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [weakSelf hideTips];
@@ -482,6 +479,7 @@
     _tips = tips;
     _tipsView.hidden = NO;
     self.tipsView.tipArray = _tips;
+    [self showTips];
 }
 
 - (void)setBrowseAll:(NSInteger)browseAll {
