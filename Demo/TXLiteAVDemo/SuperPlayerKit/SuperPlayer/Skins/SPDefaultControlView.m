@@ -91,7 +91,6 @@
 
 - (void)hideTips {
     _tipsView.hidden = YES;
-    [_tipsView removeFromSuperview];
 }
 
 - (void)makeSubViewsConstraints {
