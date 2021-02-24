@@ -576,7 +576,6 @@
     if (!_videoSlider) {
         _videoSlider                       = [[PlayerSlider alloc] init];
         [_videoSlider setThumbImage:SuperPlayerImage(@"slider_thumb") forState:UIControlStateNormal];
-        _videoSlider.minimumTrackTintColor = TintColor;
         // slider开始滑动事件
         [_videoSlider addTarget:self action:@selector(progressSliderTouchBegan:) forControlEvents:UIControlEventTouchDown];
         // slider滑动中事件

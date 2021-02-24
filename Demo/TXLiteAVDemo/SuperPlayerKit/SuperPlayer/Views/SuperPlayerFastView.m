@@ -10,7 +10,7 @@
 #import "SuperPlayer.h"
 #import "SuperPlayerView+Private.h"
 #import "UIView+MMLayout.h"
-
+#import "YLProgressBar.h"
 #define THUMB_VIEW_WIDTH    142
 #define THUMB_VIEW_HEIGHT   (142/(16/9.0))
 
@@ -72,11 +72,22 @@
     return _snapshotView;
 }
 
-- (UIProgressView *)progressView {
+- (YLProgressBar *)progressView {
     if (!_progressView) {
-        _progressView                   = [[UIProgressView alloc] init];
-        _progressView.progressTintColor = [UIColor whiteColor];
-        _progressView.trackTintColor    = [[UIColor lightGrayColor] colorWithAlphaComponent:0.4];
+        _progressView                   = [[YLProgressBar alloc] init];
+        UIColor *startColor = [UIColor colorWithRed:247/255 green:181.0/255 blue:0.0/255 alpha:1.0];
+        UIColor *middleColor = [UIColor colorWithRed:182.0/255 green:32.0/255 blue:224.0/255 alpha:1.0];
+        UIColor *endColor = [UIColor colorWithRed:50.0/255 green:197.0/255 blue:255.0/255 alpha:1.0];
+        NSArray *colors = @[endColor,middleColor,startColor];
+        _progressView.progressTintColors = colors;
+        _progressView.hideStripes        = YES;
+        _progressView.hideTrack          = YES;
+        _progressView.type               = YLProgressBarTypeFlat;
+        _progressView.behavior           = YLProgressBarBehaviorDefault;
+        _progressView.stripesOrientation       = YLProgressBarStripesOrientationLeft;
+//        _progressView.indicatorTextDisplayMode = YLProgressBarIndicatorTextDisplayModeProgress;
+        _progressView.progressStretch          = NO;
+        _progressView.trackTintColor    = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.3];
         [self addSubview:_progressView];
     }
     return _progressView;
@@ -97,6 +108,7 @@
             }];
             [self.progressView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.mas_equalTo(self);
+                make.height.mas_equalTo(3);
                 make.top.equalTo(self.imgView.mas_bottom).offset(10);
                 make.width.mas_equalTo(120);
             }];
@@ -128,6 +140,7 @@
             }];
             [self.progressView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.mas_equalTo(self);
+                make.height.mas_equalTo(3);
                 make.top.equalTo(self.textLabel.mas_bottom).offset(10);
                 make.width.mas_equalTo(120);
             }];

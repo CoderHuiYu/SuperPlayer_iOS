@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class YLProgressBar;
 typedef enum : NSUInteger {
     ImgWithProgress,    // 图片+进度，比如声音滑动
     TextWithProgress,   // 文字+进度，比如进度滑动
@@ -17,7 +17,7 @@ typedef enum : NSUInteger {
 
 @interface SuperPlayerFastView : UIView
 /** 快进快退进度progress*/
-@property (nonatomic, strong) UIProgressView          *progressView;
+@property (nonatomic, strong) YLProgressBar          *progressView;
 /** 快进快退时间*/
 @property (nonatomic, strong) UILabel                 *textLabel;
 /** 快进快退亮度图片*/

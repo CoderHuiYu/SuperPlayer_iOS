@@ -54,13 +54,20 @@
     _progressView                   = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     _progressView.progressTintColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.3];
     _progressView.trackTintColor    = [UIColor clearColor];
-    [_progressView.layer addSublayer:[self setGradualChangingColor:_progressView colors:@[@"F7B500", @"B620E0", @"32C5FF"]]];
+//    [_progressView.layer addSublayer:[self setGradualChangingColor:_progressView colors:@[@"F7B500", @"B620E0", @"32C5FF"]]];
     [self addSubview:_progressView];
   
     self.pointArray = [NSMutableArray new];
     
     self.maximumValue = 1;
+ 
     self.maximumTrackTintColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
+    UIColor *startColor = [UIColor colorWithRed:247/255 green:181.0/255 blue:0.0/255 alpha:1.0];
+    UIColor *middleColor = [UIColor colorWithRed:182.0/255 green:32.0/255 blue:224.0/255 alpha:1.0];
+    UIColor *endColor = [UIColor colorWithRed:50.0/255 green:197.0/255 blue:255.0/255 alpha:1.0];
+    NSArray *colors = @[endColor,middleColor,startColor];
+    UIImage *img = [self getGradientImageWithColors:colors imgSize:self.bounds.size];
+    [self setMinimumTrackImage:img forState:UIControlStateNormal];
     
     [_progressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self);
@@ -70,7 +77,6 @@
     }];
     _progressView.layer.masksToBounds = YES;
     _progressView.layer.cornerRadius  = 1;
-    self.progressView.backgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.8];
     [self sendSubviewToBack:self.progressView];
 }
 
@@ -140,6 +146,30 @@
 //                        10);
 //    
 //}
+
+
+-(UIImage *)getGradientImageWithColors:(NSArray*)colors imgSize:(CGSize)imgSize
+{
+    NSMutableArray *arRef = [NSMutableArray array];
+    for(UIColor *ref in colors) {
+        [arRef addObject:(id)ref.CGColor];
+        
+    }
+    UIGraphicsBeginImageContextWithOptions(imgSize, YES, 1);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    CGColorSpaceRef colorSpace = CGColorGetColorSpace([[colors firstObject] CGColor]);
+    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (CFArrayRef)arRef, NULL);
+    CGPoint start = CGPointMake(0.0, 0.0);
+    CGPoint end = CGPointMake(imgSize.width, imgSize.height);
+    CGContextDrawLinearGradient(context, gradient, start, end, kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    CGGradientRelease(gradient);
+    CGContextRestoreGState(context);
+    CGColorSpaceRelease(colorSpace);
+    UIGraphicsEndImageContext();
+    return image;
+}
 
 //绘制渐变色颜色的方法
 - (CAGradientLayer *)setGradualChangingColor:(UIView *)view colors:(NSArray<NSString *> *)hexColors{
