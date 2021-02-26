@@ -200,7 +200,27 @@
 }
 
 
-
+//数据转换 100194
+- (NSString *)digitalTransformation:(NSInteger)numInteger
+{
+    if (numInteger >= 0 && numInteger <= 999) {
+        return [NSString stringWithFormat:@"%ld",(long)numInteger];
+    }else if (numInteger >= 1000 && numInteger <= 9999){
+        NSInteger giveFloat = numInteger / 1000;
+        if (giveFloat%1000 > 0) {
+            return [NSString stringWithFormat:@"%ldK+",giveFloat];
+        }
+        return [NSString stringWithFormat:@"%ldK",giveFloat];
+    }else if (numInteger >= 10000 && numInteger <= 99999){
+        NSInteger giveFloat = numInteger / 10000;
+        if (giveFloat%1000 > 0) {
+            return [NSString stringWithFormat:@"%ldK+",giveFloat];
+        }
+        return [NSString stringWithFormat:@"%.ldW",giveFloat];
+    }else{
+        return @"10W+";
+    }
+}
 
 #pragma mark - Action
 - (void)hideTipsImmediately{
@@ -486,17 +506,17 @@
 
 - (void)setBrowseAll:(NSInteger)browseAll {
     _browseAll = browseAll;
-    [self.playNumButton setTitle: [NSString stringWithFormat:@"%ld", _browseAll] forState:UIControlStateNormal];
+    [self.playNumButton setTitle:[self digitalTransformation:_browseAll] forState:UIControlStateNormal];
 }
 
 - (void)setThumbAll:(NSInteger)thumbAll {
     _thumbAll = thumbAll;
-    [self.thumbUpButton setTitle: [NSString stringWithFormat:@"%ld", _thumbAll] forState:UIControlStateNormal];
+    [self.thumbUpButton setTitle:[self digitalTransformation:_thumbAll] forState:UIControlStateNormal];
 }
 
 - (void)setShareCountAll:(NSInteger)shareCountAll {
     _shareCountAll = shareCountAll;
-    [self.shareButton setTitle: [NSString stringWithFormat:@"%ld", _shareCountAll] forState:UIControlStateNormal];
+    [self.shareButton setTitle:[self digitalTransformation:_shareCountAll] forState:UIControlStateNormal];
 }
 
 - (UILabel *)titleLabel {
