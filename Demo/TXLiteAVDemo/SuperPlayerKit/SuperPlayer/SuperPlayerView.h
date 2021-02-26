@@ -98,6 +98,7 @@ typedef NS_ENUM(NSInteger, SuperPlayerLayoutStyle) {
 @property (nonatomic, assign) NSInteger shareCountAll;
 @property (nonatomic, assign) NSInteger praiseSign; //0：未点赞 1：已点赞
 @property (nonatomic, strong) NSArray *tips;// 提示语
+@property (nonatomic, copy) NSString *title;
 /**
  * 视频雪碧图
  */

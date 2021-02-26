@@ -1196,7 +1196,11 @@ static UISlider * _volumeSlider;
     SPDefaultControlView * temp =  (SPDefaultControlView *)self.controlView;
     temp.praiseSign = _praiseSign;
 }
-
+- (void)setTitle:(NSString *)title {
+    _title = title;
+    SPDefaultControlView * temp =  (SPDefaultControlView *)self.controlView;
+    temp.title = _title;
+}
 - (void)setTips:(NSArray *)tips {
     _tips = tips;
     SPDefaultControlView * temp =  (SPDefaultControlView *)self.controlView;
