@@ -925,6 +925,10 @@ static UISlider * _volumeSlider;
         [self.controlView setPlayState:YES];
     }
 }
+- (void)hideTipsImmediately{
+    SPDefaultControlView * temp =  (SPDefaultControlView *)self.controlView;
+    [temp hideTipsImmediately];
+}
 
 #pragma mark - UIPanGestureRecognizer手势方法
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer

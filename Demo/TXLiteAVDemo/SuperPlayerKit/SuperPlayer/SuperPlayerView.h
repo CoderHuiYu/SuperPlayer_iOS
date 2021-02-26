@@ -110,7 +110,10 @@ typedef NS_ENUM(NSInteger, SuperPlayerLayoutStyle) {
  * 播放model
  */
 - (void)playWithModel:(SuperPlayerModel *)playerModel;
-
+/**
+ * hide tipView
+ */
+- (void)hideTipsImmediately;
 /**
  * 重置player
  */

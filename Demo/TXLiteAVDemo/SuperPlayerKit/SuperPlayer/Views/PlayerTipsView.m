@@ -36,8 +36,15 @@
     [self initialize];
 }
 
+- (void)hideTipsImmediately {
+    [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[TipView class]]) {
+            [obj removeFromSuperview];
+        }
+    }];
+}
+
 - (void)initialize {
-    
     if (_tips.count < 2) {
         [_tips insertObject:@"" atIndex:0];
     }

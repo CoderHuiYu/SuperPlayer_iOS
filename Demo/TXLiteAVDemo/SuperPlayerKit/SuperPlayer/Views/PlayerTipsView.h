@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PlayerTipsView : UIView
 
 @property (nonatomic, strong) NSArray<NSString *> *tipArray;
-
+- (void)hideTipsImmediately;
 @end
 
 NS_ASSUME_NONNULL_END

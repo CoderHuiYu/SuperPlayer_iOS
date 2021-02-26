@@ -92,4 +92,5 @@ typedef void (^SelectActionBlock)(BOOL selected);
 @property (nonatomic, copy) ActionBlock shareActionBlock;
 @property (nonatomic, copy) SelectActionBlock thumbUpActionBlock;
 @property (nonatomic, strong) NSArray *tips;
+- (void)hideTipsImmediately;
 @end
