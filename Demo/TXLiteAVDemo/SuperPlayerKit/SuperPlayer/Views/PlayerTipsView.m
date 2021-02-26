@@ -29,6 +29,7 @@
 }
 
 -(void)setTipArray:(NSArray<NSString *> *)tipArray {
+    //移除之前的tips
     [self.tips removeAllObjects];
     _tipArray = tipArray;
     [self.tips addObjectsFromArray:tipArray];
