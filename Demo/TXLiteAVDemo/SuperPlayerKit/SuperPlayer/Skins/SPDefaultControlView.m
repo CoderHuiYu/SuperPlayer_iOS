@@ -207,13 +207,13 @@
         return [NSString stringWithFormat:@"%ld",(long)numInteger];
     }else if (numInteger >= 1000 && numInteger <= 9999){
         NSInteger giveFloat = numInteger / 1000;
-        if (giveFloat%1000 > 0) {
+        if (numInteger%1000 > 0) {
             return [NSString stringWithFormat:@"%ldK+",giveFloat];
         }
         return [NSString stringWithFormat:@"%ldK",giveFloat];
     }else if (numInteger >= 10000 && numInteger <= 99999){
         NSInteger giveFloat = numInteger / 10000;
-        if (giveFloat%1000 > 0) {
+        if (numInteger%1000 > 0) {
             return [NSString stringWithFormat:@"%ldK+",giveFloat];
         }
         return [NSString stringWithFormat:@"%.ldW",giveFloat];
