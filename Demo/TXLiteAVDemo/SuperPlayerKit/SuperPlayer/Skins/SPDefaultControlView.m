@@ -203,10 +203,9 @@
 
 
 #pragma mark - Action
-- (void)hideTipsImmediatel{
+- (void)hideTipsImmediately{
     [self.tipsView hideTipsImmediately];
 }
-
 /**
  *  点击切换分别率按钮
  */
