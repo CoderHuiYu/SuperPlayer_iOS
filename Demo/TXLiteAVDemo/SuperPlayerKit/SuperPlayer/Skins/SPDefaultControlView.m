@@ -433,6 +433,13 @@
     self.danmakuBtn.hidden      = self.disableDanmakuBtn;
     self.thumbUpButton.hidden   = NO;
     [self.backBtn setImage:SuperPlayerImage(@"back_full") forState:UIControlStateNormal];
+    
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.backBtn.mas_trailing).offset(5);
+        make.centerY.equalTo(self.backBtn.mas_centerY);
+        make.trailing.equalTo(self.thumbUpButton.mas_leading).offset(-10);
+    }];
+    
     [self.totalTimeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         if (self.resolutionArray.count > 0) {
             make.trailing.equalTo(self.resolutionBtn.mas_leading);
@@ -472,6 +479,12 @@
     self.thumbUpButton.hidden   = YES;
     self.moreContentView.hidden = YES;
     self.resolutionView.hidden  = YES;
+    
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.backBtn.mas_trailing).offset(5);
+        make.centerY.equalTo(self.backBtn.mas_centerY);
+        make.right.mas_equalTo(self).offset(10);
+    }];
     
     [self.totalTimeLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(self.fullScreenBtn.mas_leading);
