@@ -735,7 +735,7 @@ static UISlider * _volumeSlider;
             return;
         
         if (self.controlView.hidden) {
-            [[self.controlView fadeShow] fadeOut:5];
+            [[self.controlView fadeShow] fadeOut:3];
         } else {
             [self.controlView fadeOut:0.2];
         }

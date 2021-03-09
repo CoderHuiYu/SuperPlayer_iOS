@@ -199,26 +199,17 @@
     }];
 }
 
-
 //数据转换 100194
 - (NSString *)digitalTransformation:(NSInteger)numInteger
 {
-    if (numInteger >= 0 && numInteger <= 999) {
-        return [NSString stringWithFormat:@"%ld",(long)numInteger];
+    if (numInteger <= 999) {
+        return [NSString stringWithFormat:@"%ld",numInteger];
     }else if (numInteger >= 1000 && numInteger <= 9999){
-        NSInteger giveFloat = numInteger / 1000;
-        if (numInteger%1000 > 0) {
-            return [NSString stringWithFormat:@"%ldK+",giveFloat];
-        }
-        return [NSString stringWithFormat:@"%ldK",giveFloat];
+        return [NSString stringWithFormat:@"%.1f%@",numInteger / 100 / 10.0,numInteger % 100 == 0 ? @"K" : @"K+"];
     }else if (numInteger >= 10000 && numInteger <= 99999){
-        NSInteger giveFloat = numInteger / 10000;
-        if (numInteger%1000 > 0) {
-            return [NSString stringWithFormat:@"%ldK+",giveFloat];
-        }
-        return [NSString stringWithFormat:@"%.ldW",giveFloat];
+        return [NSString stringWithFormat:@"%.1f%@",numInteger / 1000 / 10.0,numInteger % 1000 == 0 ? @"W" : @"W+"];
     }else{
-        return @"10W+";
+        return [NSString stringWithFormat:@"10%@",numInteger == 100000 ? @"W" : @"W+"];
     }
 }
 
