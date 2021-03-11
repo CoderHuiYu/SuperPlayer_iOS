@@ -880,6 +880,7 @@ static UISlider * _volumeSlider;
  *  屏幕方向发生变化会调用这里
  */
 - (void)onDeviceOrientationChange {
+    if (self.nextCoverView.hidden == false) { return; }
     if (!self.isLoaded) { return; }
     if (self.isLockScreen) { return; }
     if (self.didEnterBackground) { return; };
