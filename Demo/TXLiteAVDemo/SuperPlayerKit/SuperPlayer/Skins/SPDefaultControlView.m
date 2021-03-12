@@ -285,6 +285,12 @@
 }
 
 - (void)thumbUpBtnClick:(UIButton *)sender {
+    if (self.isLogin == false) {
+        if (self.thumbUpActionBlock) {
+            self.thumbUpActionBlock(sender.selected);
+        }
+        return;
+    }
     // 点赞数需要加一 或者减一
     self.praiseSign = self.praiseSign == 1 ? 0 : 1;
     self.thumbAll = self.praiseSign == 0 ? self.thumbAll - 1 : self.thumbAll + 1;

@@ -1173,7 +1173,14 @@ static UISlider * _volumeSlider;
     return YES;
 }
 
-#pragma mark - Setter 
+#pragma mark - Setter
+
+- (void)setIsLogin:(BOOL)isLogin {
+    _isLogin = isLogin;
+    SPDefaultControlView * temp =  (SPDefaultControlView *)self.controlView;
+    temp.isLogin = _isLogin;
+}
+
 - (void)setBrowseAll:(NSInteger)browseAll {
     _browseAll = browseAll;
     SPDefaultControlView * temp =  (SPDefaultControlView *)self.controlView;
