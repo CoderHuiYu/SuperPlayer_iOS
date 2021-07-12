@@ -1579,7 +1579,9 @@ static UISlider * _volumeSlider;
                     p.where = p.time/duration;
             }
             self.controlView.pointArray = self.keyFrameDescList;
-            
+            if ([self.delegate respondsToSelector:@selector(superPlayerDidSureStart:)]) {
+                [self.delegate superPlayerDidSureStart:self];
+            }
             // 不使用vodPlayer.autoPlay的原因是暂停的时候会黑屏，影响体验
             if (!self.autoPlay) {
                 self.autoPlay = YES; // 下次用户设置自动播放失效
