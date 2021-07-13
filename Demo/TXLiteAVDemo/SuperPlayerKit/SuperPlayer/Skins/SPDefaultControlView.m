@@ -504,6 +504,16 @@
     self.pointJumpBtn.hidden = YES;
 }
 
+- (void)noLock {
+    self.lockBtn.selected = NO;
+    self.isLockScreen = NO;
+    self.topImageView.hidden    = NO;
+    self.bottomImageView.hidden = NO;
+    if (self.isLive) {
+        self.backLiveBtn.hidden = NO;
+    }
+    [self fadeOut:3];
+}
 #pragma mark - Private Method
 
 #pragma mark - setter

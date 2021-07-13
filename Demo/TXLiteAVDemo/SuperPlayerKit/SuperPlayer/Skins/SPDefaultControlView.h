@@ -93,5 +93,6 @@ typedef void (^SelectActionBlock)(BOOL selected);
 @property (nonatomic, copy) SelectActionBlock thumbUpActionBlock;
 @property (nonatomic, strong) NSArray *tips;
 @property (nonatomic, assign) BOOL isLogin;
+- (void)noLock;
 - (void)hideTipsImmediately;
 @end

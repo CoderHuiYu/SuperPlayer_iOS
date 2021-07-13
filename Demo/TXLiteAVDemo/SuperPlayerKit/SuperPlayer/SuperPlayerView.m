@@ -811,6 +811,8 @@ static UISlider * _volumeSlider;
     // 自动退出全屏
     if (self.isFullScreen) {
         self.isFullScreen = NO;
+        SPDefaultControlView * temp =  (SPDefaultControlView *)self.controlView;
+        [temp noLock];
     }
 }
 
