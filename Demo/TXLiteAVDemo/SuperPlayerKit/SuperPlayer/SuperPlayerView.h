@@ -102,6 +102,7 @@ typedef NS_ENUM(NSInteger, SuperPlayerLayoutStyle) {
 @property (nonatomic, strong) NSArray *tips;// 提示语
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) BOOL isLogin;
+@property (nonatomic, assign) BOOL isForbidden; //视频不可播放 然后不让横屏
 /**
  * 视频雪碧图
  */

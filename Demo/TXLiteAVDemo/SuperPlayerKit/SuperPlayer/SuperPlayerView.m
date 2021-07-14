@@ -882,6 +882,7 @@ static UISlider * _volumeSlider;
  *  屏幕方向发生变化会调用这里
  */
 - (void)onDeviceOrientationChange {
+    if (self.isForbidden) { return; }
     if (self.nextCoverView.hidden == false) { return; }
     if (!self.isLoaded) { return; }
     if (self.isLockScreen) { return; }
@@ -1176,6 +1177,9 @@ static UISlider * _volumeSlider;
 }
 
 #pragma mark - Setter
+- (void)setIsForbidden:(BOOL)isForbidden {
+    _isForbidden = isForbidden;
+}
 
 - (void)setIsLogin:(BOOL)isLogin {
     _isLogin = isLogin;
